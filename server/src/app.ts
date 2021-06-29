@@ -4,6 +4,7 @@ import { Server } from "socket.io";
 import cors from "cors";
 import config from "config";
 import logger from "./utils/logger";
+import socket from "./socket";
 import { version } from "../package.json";
 
 const port = config.get<number>("port");
@@ -26,4 +27,5 @@ app.get("/", (_, res) => {
 httpServer.listen(port, host, () => {
   logger.info(`🚀 Server version ${version} Up And Running`);
   logger.info(`http://${host}:${port}`);
+  socket({ io });
 });
