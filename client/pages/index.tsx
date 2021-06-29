@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { useSocket } from "../context/socket.context";
@@ -18,6 +18,11 @@ export default function Home() {
 
     localStorage.setItem("username", value);
   };
+
+  useEffect(() => {
+    if (usernameRef)
+      usernameRef.current.value = localStorage.getItem("username") || "";
+  }, []);
 
   return (
     <div>

@@ -24,18 +24,20 @@ const Messages = () => {
         time: `${date.getHours()}:${date.getMinutes()}`,
       },
     ]);
+
+    newMessageRef.current.value = "";
   };
 
   return (
     <div>
-      {messages.map((message, idx) => {
-        return <p key={idx}>{JSON.stringify(message)}</p>;
+      {messages.map(({ message }, idx) => {
+        return <p key={idx}>{message}</p>;
       })}
 
       <div>
         <textarea
           name=""
-          cols={1}
+          rows={1}
           ref={newMessageRef}
           placeholder="Tell us what you are thinking"
         />

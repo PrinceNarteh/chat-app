@@ -18,6 +18,12 @@ const Rooms = () => {
     newRoomRef.current.value = "";
   };
 
+  const handleJoinRoom = (key) => {
+    if (key === roomId) return;
+
+    socket.emit(EVENTS.CLIENT.JOIN_ROOM, key);
+  };
+
   return (
     <div>
       <nav>
@@ -27,7 +33,15 @@ const Rooms = () => {
         </div>
 
         {Object.keys(rooms).map((key) => (
-          <div key={key}>{rooms[key].name}</div>
+          <div key={key}>
+            <button
+              disabled={key === roomId}
+              title={`Join ${rooms[key].name}`}
+              onClick={() => handleJoinRoom(key)}
+            >
+              {rooms[key].name}
+            </button>
+          </div>
         ))}
       </nav>
     </div>
